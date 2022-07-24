@@ -4,3 +4,13 @@ cron*
 settings.conf
 
 *.bat
+
+bin/*
+
+lib/*
+
+logs/*
+
+share/*
+
+pyvenv.cfg

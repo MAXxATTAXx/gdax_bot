@@ -140,14 +140,14 @@ if __name__ == "__main__":
 
     # Retrieve dict list of all trading pairs
     products = public_client.get_products()
-    base_min_size = None
+    min_market_funds = None
     base_increment = None
     quote_increment = None
     for product in products:
         if product.get("id") == market_name:
             base_currency = product.get("base_currency")
             quote_currency = product.get("quote_currency")
-            base_min_size = Decimal(product.get("base_min_size")).normalize()
+            min_market_funds = Decimal(product.get("min_market_funds")).normalize()
             base_increment = Decimal(product.get("base_increment")).normalize()
             quote_increment = Decimal(product.get("quote_increment")).normalize()
             if amount_currency == product.get("quote_currency"):
@@ -158,7 +158,7 @@ if __name__ == "__main__":
                 raise Exception(f"amount_currency {amount_currency} not in market {market_name}")
             print(json.dumps(product, indent=2))
 
-    print(f"base_min_size: {base_min_size}")
+    print(f"min_market_funds: {min_market_funds}")
     print(f"quote_increment: {quote_increment}")
 
     # Prep boto SNS client for email notifications
